@@ -8,27 +8,28 @@
  * @copyright Copyright (c) 2025
  *
  */
+ #pragma once
 
 #include <fstream>
 #include <string>
+#include <memory>
 
-#include <boost/filesystem.hpp>
-#include <boost/noncopyable.hpp>
+#include <overlay_loader.hpp>
+#include <bitstream_loader.hpp>
+#include <fpga_manager.hpp>
 
 namespace driver {
 
 namespace fpga_prog {
 
-class fpga_manager : private boost::noncopyable {
+class fpga_manager {
 public:
-  explicit fpga_manager(const std::string &manager_name = "fpga0");
+  explicit fpga_manager(const std::string& bitstream_path, const std::string& overlay_path);
 
 private:
-  std::string_view m_bitstream_path;
-  bool m_is_bitstream_loaded;
+  std::unique_ptr<overlay_loader> ovl_loader = nullptr;
+  std::unique_ptr<bitstream_loader> bts_loader = nullptr;
 
-  std::string_view m_dts_overlay_path;
-  bool m_is_dts_overlay_applied;
 };
 }; // namespace fpga_prog
 }; // namespace driver
