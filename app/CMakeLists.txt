@@ -33,6 +33,13 @@ target_link_libraries(OtaUpdater PRIVATE
     Boost::program_options
 )
 
+add_subdirectory(../driver/fpga_prog ../driver/fpga_prog)
+
+include_directories(../driver/fpga_prog)
+
+target_link_libraries(OtaUpdater PUBLIC
+    fpga_prog)
+
 if(UNIX)
     target_link_libraries(OtaUpdater PRIVATE pthread)
 endif()
