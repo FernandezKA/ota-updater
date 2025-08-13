@@ -10,6 +10,8 @@
  */
  #pragma once
 
+ #include "base_loader.hpp"
+
 namespace driver {
 namespace fpga_prog {
 
@@ -18,12 +20,12 @@ public:
   explicit bitstream_loader(const std::string &bitstream_path);
   ~bitstream_loader() = default;
 
-  int load_bitstream();
-  bool is_bitstream_loaded() const;
+  int load();
+  bool is_loaded() const;
 
 private:
   std::string m_path;
-  bool is_loaded = false;
+  bool m_is_loaded = false;
 };
 
 } // namespace fpga_prog

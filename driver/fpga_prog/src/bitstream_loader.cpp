@@ -19,12 +19,5 @@
 
         }
 
-        int bitstream_loader::load_bitstream() {
-            return 0;
-        }
-
-        bool bitstream_loader::is_bitstream_loaded() const {
-            return is_loaded;
-        }
     }
  }

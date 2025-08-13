@@ -9,12 +9,14 @@ file(MAKE_DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 file(MAKE_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 set(INCLUDES
+    ./inc/base_loader.hpp
     ./inc/bitstream_loader.hpp
     ./inc/fpga_manager.hpp
     ./inc/overlay_loader.hpp    
 )
 
 set(SOURCES
+    ./src/base_loader.cpp
     ./src/bitstream_loader.cpp
     ./src/fpga_manager.cpp
     ./src/overlay_loader.cpp   
