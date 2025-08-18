@@ -22,18 +22,17 @@
     namespace fpga_prog{
         class base_loader {
             private:
-            std::string_view m_path;
+            std::string_view m_path_src;
+            std::string_view m_path_dest;
             bool m_is_loaded;
             std::function<void(void)> m_callback;
             public:
-            explicit base_loader(const std::string_view path);
+            explicit base_loader(std::string_view m_path_src, std::string_view m_path_dest);
             virtual ~base_loader() = default;
 
             virtual int load();
-            virtual int load_async();
             virtual int remove();
             virtual bool is_loaded() const;
-            virtual int set_load_callback(std::function<void(void)>);
         };
     }
  }
