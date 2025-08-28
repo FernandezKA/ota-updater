@@ -30,21 +30,38 @@ cmake_policy(SET CMP0167 NEW)
 
 find_package(Boost 1.66.0 REQUIRED COMPONENTS filesystem system program_options)
 
+include_directories(${PROJECT_ROOT_DIR}/app/inc)
+
 set(SRC
     src/main.cpp
     src/security.cpp
     src/updater.cpp
 )
 
-add_executable(OtaUpdater ${SRC})
+set(INC
+    inc/security.hpp
+    inc/updater.hpp    
+)
+
+add_executable(OtaUpdater ${SRC} ${INC})
 
 add_subdirectory(
     ${PROJECT_ROOT_DIR}/driver/fpga_prog
     ${CMAKE_BINARY_DIR}/driver/fpga_prog
 )
 
+add_subdirectory(
+    ${PROJECT_ROOT_DIR}/http-server
+    ${CMAKE_BINARY_DIR}/http-server
+)
+
 target_include_directories(OtaUpdater PRIVATE
     ${PROJECT_ROOT_DIR}/driver/fpga_prog/inc
+    ${Boost_INCLUDE_DIRS}
+)
+
+target_include_directories(OtaUpdater PRIVATE
+    ${PROJECT_ROOT_DIR}/http-server
     ${Boost_INCLUDE_DIRS}
 )
 
@@ -53,6 +70,7 @@ target_link_libraries(OtaUpdater PRIVATE
     Boost::system
     Boost::program_options
     fpga_prog
+    http-server
 )
 
 if(UNIX)

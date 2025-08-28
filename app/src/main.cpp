@@ -13,6 +13,8 @@
 #include <string>
 #include <boost/program_options.hpp>
 
+#include "../http-server/inc/server.hpp"
+#include <thread>
 
  namespace po = boost::program_options;
 
@@ -35,6 +37,23 @@
         std::cout << desc << "\n";
         return 0;
     }
+
+
+        server::http_server server;
+    
+    std::thread server_thread([&server]() {
+        server.run_server();
+    });
+    
+    std::cout << "Server started. Press Enter to stop..." << std::endl;
+    std::cin.get();
+    
+    server.stop_server();
+    if (server_thread.joinable()) {
+        server_thread.join();
+    }
+    
+    std::cout << "Server stopped." << std::endl;
 
     
 

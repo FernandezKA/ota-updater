@@ -29,6 +29,8 @@ int base_loader::load() {
     throw std::runtime_error("Failed to open file: " + file_path.string());
   }
 
+  m_is_loaded = true;
+
   return 0;
 }
 
@@ -51,6 +53,8 @@ int base_loader::remove() {
                ? (error.value())
                : (EINVAL);
   }
+
+  m_is_loaded = false;
 
   return 0;
 }

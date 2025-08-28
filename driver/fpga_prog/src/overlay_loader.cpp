@@ -13,16 +13,9 @@
 
  namespace driver {
     namespace fpga_prog{
-        overlay_loader::overlay_loader(const std::string& overlay_path) : m_path(overlay_path) {
+        overlay_loader::overlay_loader(std::string_view overlay_path, std::string_view overlay_configfs_path) : 
+            base_loader(overlay_path, overlay_configfs_path) {
 
-        }
-
-        int overlay_loader::load_overlay() {
-         return 0;
-        }
-
-        bool overlay_loader::is_overlay_loaded() const {
-         return false;
         }
     }
  }

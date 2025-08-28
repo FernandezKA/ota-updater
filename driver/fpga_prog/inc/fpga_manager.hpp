@@ -24,7 +24,10 @@ namespace fpga_prog {
 
 class fpga_manager {
 public:
-  explicit fpga_manager(const std::string& bitstream_path, const std::string& overlay_path);
+  explicit fpga_manager(std::string_view bitstream_path, std::string_view overlay_path);
+
+  int load();
+  int is_loaded() const;
 
 private:
   std::unique_ptr<overlay_loader> ovl_loader = nullptr;

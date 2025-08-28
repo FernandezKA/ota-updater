@@ -11,16 +11,19 @@
 #pragma once
 
 #include <string>
+#include "base_loader.hpp"
+
 
 namespace driver {
 namespace fpga_prog {
-class overlay_loader {
+class overlay_loader : public base_loader {
 public:
-  explicit overlay_loader(const std::string &overlay_path);
+  explicit overlay_loader(std::string_view overlay_path, std::string_view overlay_configfs_path = "configfs");
   ~overlay_loader() = default;
 
   int load_overlay();
   bool is_overlay_loaded() const;
+  int remove();
 
 private:
   std::string m_path;

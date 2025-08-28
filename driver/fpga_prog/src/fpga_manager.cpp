@@ -16,7 +16,10 @@
 namespace driver{
     namespace fpga_prog{
         
-        fpga_manager::fpga_manager(const std::string& bitstream_path, const std::string& overlay_path) {
+        fpga_manager::fpga_manager(std::string_view bitstream_path, std::string_view overlay_path) : 
+            ovl_loader(std::make_unique<overlay_loader>(overlay_path)), 
+            bts_loader(std::make_unique<bitstream_loader>(bitstream_path))
+        {
 
         };
     }
